@@ -114,7 +114,7 @@ services:
       NOMAD_MONGO_HOST: mongo
       NOMAD_LOGSTASH_HOST: logtransfer
       NOMAD_TEMPORAL_HOST: temporal
-      - TZ=${TZ}  # This will use the value from the .env file
+      TZ=${TZ}  # This will use the value from the .env file
     env_file:
       - ./.env
     depends_on:
