@@ -287,7 +287,7 @@ services:
       NOMAD_RABBITMQ_HOST: rabbitmq
       NOMAD_ELASTIC_HOST: elastic
       NOMAD_MONGO_HOST: mongo
-      - TZ=${TZ}  # This will use the value from the .env file
+      TZ: ${TZ}  # This will use the value from the .env file
     env_file:
       - ./.env
     volumes:
