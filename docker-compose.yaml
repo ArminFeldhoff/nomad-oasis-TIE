@@ -9,6 +9,7 @@ services:
       - RABBITMQ_DEFAULT_USER=rabbitmq
       - RABBITMQ_DEFAULT_PASS=rabbitmq
       - RABBITMQ_DEFAULT_VHOST=/
+      - TZ=${TZ}  # This will use the value from the .env file
     volumes:
       - rabbitmq:/var/lib/rabbitmq
     healthcheck:
@@ -26,6 +27,7 @@ services:
     environment:
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - discovery.type=single-node
+      - TZ=${TZ}  # This will use the value from the .env file
     volumes:
       - elastic:/usr/share/elasticsearch/data
     healthcheck:
@@ -48,6 +50,7 @@ services:
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
+      - TZ=${TZ}  # This will use the value from the .env file
     volumes:
       - mongo:/data/db
       - ./.volumes/mongo:/backup
@@ -86,6 +89,7 @@ services:
       - POSTGRES_SEEDS=postgresql
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CLI_ADDRESS=temporal:7233
+      - TZ=${TZ}  # This will use the value from the .env file
     image: docker.io/temporalio/auto-setup:1.28
     healthcheck:
       test: >
@@ -110,6 +114,7 @@ services:
       NOMAD_MONGO_HOST: mongo
       NOMAD_LOGSTASH_HOST: logtransfer
       NOMAD_TEMPORAL_HOST: temporal
+      - TZ=${TZ}  # This will use the value from the .env file
     env_file:
       - ./.env
     depends_on:
@@ -168,6 +173,7 @@ services:
   #     NOMAD_MONGO_HOST: mongo
   #     NOMAD_LOGSTASH_HOST: logtransfer
   #     NOMAD_TEMPORAL_HOST: temporal
+  #     TZ=${TZ}  # This will use the value from the .env file
   #   depends_on:
   #     rabbitmq:
   #       condition: service_healthy
@@ -197,6 +203,7 @@ services:
   #     NOMAD_MONGO_HOST: mongo
   #     NOMAD_LOGSTASH_HOST: logtransfer
   #     NOMAD_TEMPORAL_HOST: temporal
+  #     TZ=${TZ}  # This will use the value from the .env file
   #   deploy:
   #     replicas: 1
   #     resources:
@@ -233,6 +240,7 @@ services:
       NOMAD_LOGSTASH_HOST: logtransfer
       NOMAD_NORTH_HUB_HOST: north
       NOMAD_TEMPORAL_HOST: temporal
+      - TZ=${TZ}  # This will use the value from the .env file
     env_file:
       - ./.env
     depends_on:
@@ -279,6 +287,7 @@ services:
       NOMAD_RABBITMQ_HOST: rabbitmq
       NOMAD_ELASTIC_HOST: elastic
       NOMAD_MONGO_HOST: mongo
+      - TZ=${TZ}  # This will use the value from the .env file
     env_file:
       - ./.env
     volumes:
@@ -310,6 +319,7 @@ services:
       NOMAD_SERVICE: nomad_oasis_logtransfer
       NOMAD_ELASTIC_HOST: elastic
       NOMAD_MONGO_HOST: mongo
+      - TZ=${TZ}  # This will use the value from the .env file
     env_file:
       - ./.env
     depends_on:
